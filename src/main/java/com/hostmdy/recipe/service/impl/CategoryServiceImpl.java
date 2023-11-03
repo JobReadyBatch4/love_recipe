@@ -1,5 +1,6 @@
 package com.hostmdy.recipe.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class CategoryServiceImpl implements CategoryService{
 	public Optional<Category> getCategoryByName(String name) {
 		// TODO Auto-generated method stub
 		return categoryRepository.findByName(name);
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		// TODO Auto-generated method stub
+		return (List<Category>) categoryRepository.findAll();
 	}
 
 }

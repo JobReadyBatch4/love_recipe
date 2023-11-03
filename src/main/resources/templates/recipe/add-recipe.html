@@ -31,8 +31,8 @@
 											<label for="description" class="form-label">Recipe Description:</label>
 										</div>
 										<div class="col-md-9">
-											<input type="text" class="form-control" id="description"
-												th:field="*{description}">
+											<textarea type="text" rows="10" class="form-control" id="description"
+												th:field="*{description}" th:value="${recipe.description}"> </textarea>
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -47,67 +47,64 @@
 										</div>
 									</div>
 									<div class="row mb-3">
-										<div class="col-md-3">
+										<div class="col-md-4">
 											<label for="prepTime" class="form-label">Prep Time:</label>
 											<input type="text" class="form-control" id="prepTime"
-												th:field="*{prepTime}">
+												th:field="*{prepTime}" th:value="${recipe.prepTime}">
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-4">
 											<label for="cookTime" class="form-label">Cooktime:</label>
 											<input type="text" class="form-control" id="cookTime"
-												th:field="*{cookTime}">
+												th:field="*{cookTime}" th:value="${recipe.cookTime}">
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-4">
 											<label for="difficulty" class="form-label">Difficulty:</label>
 											<select class="form-select" id="difficulty" th:field="*{difficulty}">
 												<option
 													th:each="difficultyValue : ${T(com.hostmdy.recipe.domain.Difficulty).values()}"
 													th:value="${difficultyValue.name()}"
-													th:text="${difficultyValue.name()}">val
+													th:text="${difficultyValue.name()}"
+													th:selected="${difficultyValue.name() == recipe.difficulty.name()}"
+												>
 												</option>
 											</select>
-											<select class="form-select" th:remove="all">
-												<option>Easy</option>
-												<option>Medium</option>
-												<option>Hard</option>
-											</select>
 										</div>
 									</div>
 									<div class="row mb-3">
-										<div class="col-md-3">
+										<div class="col-md-12">
 											<label for="servings" class="form-label">Servings</label>
 											<input type="text" class="form-control" id="servings"
-												th:field="*{servings}">
+												th:field="*{servings}" th:value="${recipe.servings}">
 										</div>
 									</div>
 
 									<div class="row mb-3">
-										<div class="col-md-3">
-											<label for="directions" class="form-label">Directions</label>
-											<input type="text" class="form-control" id="directions"
-												th:field="*{directions}">
+										<div class="col-md-12">
+											<label for="review" class="form-label">Review</label>
+											<input type="text" class="form-control" id="review"
+												th:field="*{review}" th:value="${recipe.review}">
 										</div>
 									</div>
 
 									<div class="row mb-3">
-										<div class="col-md-3">
+										<div class="col-md-12">
 											<label for="title" class="form-label">Name</label>
-											<input type="text" class="form-control" id="title" th:field="*{name}">
+											<input type="text" class="form-control" id="title" th:field="*{name}" th:value="${recipe.name}">
 										</div>
 									</div>
 
 									<div class="row mb-3">
-										<div class="col-md-3">
+										<div class="col-md-12">
 											<label for="source" class="form-label">Source</label>
-											<input type="text" class="form-control" id="source" th:field="*{source}">
+											<input type="text" class="form-control" id="source" th:field="*{source}" th:value="${recipe.source}">
 										</div>
 									</div>
 
 									<div class="row mb-3">
-										<div class="col-md-3">
+										<div class="col-md-12">
 											<label for="note" class="form-label">Note</label>
-											<input type="text" class="form-control" id="note"
-												th:field="*{note.recipeNote}">
+											<textarea type="text" rows="10" class="form-control" id="note"
+												th:field="*{note.note}" th:value="${recipe.note.note}"></textarea>
 										</div>
 									</div>
 									

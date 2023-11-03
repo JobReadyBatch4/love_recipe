@@ -1,8 +1,10 @@
 package com.hostmdy.recipe.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -58,10 +60,10 @@ public class Recipe {
 	private Note note;
 	
 	@OneToMany(mappedBy = "recipe",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Set<Ingredient> ingredients = new HashSet<>();
+	private List<Ingredient> ingredients = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "recipe",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Set<Direction> directions = new HashSet<>();
+	private List<Direction> directions = new ArrayList<>();
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "recipe_category",joinColumns = @JoinColumn(name = "recipe_id"),
@@ -74,11 +76,13 @@ public class Recipe {
 	@PrePersist
     void onCreate() {
     	this.createdAt = LocalDateTime.now();
+    	this.totalTime = this.cookTime+this.prepTime;
     }
 	
 	@PreUpdate
 	void onUpdate() {
 		this.updatedAt = LocalDateTime.now();
+		this.totalTime = this.cookTime+this.prepTime;
 	}
 
 	public Long getId() {
@@ -193,19 +197,19 @@ public class Recipe {
 		this.note = note;
 	}
 
-	public Set<Ingredient> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(Set<Ingredient> ingredients) {
+	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 
-	public Set<Direction> getDirections() {
+	public List<Direction> getDirections() {
 		return directions;
 	}
 
-	public void setDirections(Set<Direction> directions) {
+	public void setDirections(List<Direction> directions) {
 		this.directions = directions;
 	}
 
