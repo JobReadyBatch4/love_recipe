@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.hostmdy.recipe.domain.Ingredient;
 import com.hostmdy.recipe.domain.Recipe;
+import com.hostmdy.recipe.domain.UnitOfMeasure;
 import com.hostmdy.recipe.repository.IngredientRepository;
 import com.hostmdy.recipe.repository.RecipeRepository;
+import com.hostmdy.recipe.repository.UomRepository;
 import com.hostmdy.recipe.service.IngredientService;
 
 @Service
@@ -16,11 +18,13 @@ public class IngredientServiceImpl implements IngredientService{
 	
 	private final IngredientRepository ingredientRepository;
 	private final RecipeRepository recipeRepository;
+	private final UomRepository uomRepository;
 
-	public IngredientServiceImpl(IngredientRepository ingredientRepository, RecipeRepository recipeRepository) {
+	public IngredientServiceImpl(IngredientRepository ingredientRepository, RecipeRepository recipeRepository, UomRepository uomRepository) {
 		super();
 		this.ingredientRepository = ingredientRepository;
 		this.recipeRepository = recipeRepository;
+		this.uomRepository = uomRepository;
 	}
 
 	@Override
@@ -30,7 +34,7 @@ public class IngredientServiceImpl implements IngredientService{
 	}
 
 	@Override
-	public Ingredient createIngredient(Ingredient ingredient, Long recipeId) {
+	public Ingredient createIngredient(Ingredient ingredient, Long recipeId,Long uomId) {
 		// TODO Auto-generated method stub
 		Optional<Recipe> recipeOpt = recipeRepository.findById(recipeId);
 		
@@ -38,9 +42,19 @@ public class IngredientServiceImpl implements IngredientService{
 			throw new NullPointerException("recipeId is not found in recipe table");
 		}
 		
+		Optional<UnitOfMeasure> uomOpt = uomRepository.findById(uomId);
+		
+		if(uomOpt.isEmpty()) {
+			throw new NullPointerException("uom is not found");
+		}
+		
 		Recipe recipe = recipeOpt.get();
 		ingredient.setRecipe(recipe);
 		recipe.getIngredients().add(ingredient);
+		
+		UnitOfMeasure uom = uomOpt.get();
+		uom.getIngredients().add(ingredient);
+		ingredient.setUom(uom);
 		
 		return saveIngredient(ingredient);
 	}

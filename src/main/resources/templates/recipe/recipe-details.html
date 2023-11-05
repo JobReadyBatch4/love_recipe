@@ -26,7 +26,8 @@
 
 								<div class="col-md-6">
 									<a class="btn btn-secondary" href="#"
-										th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Change Image</a>
+										th:href="@{'/image/recipe/' + ${recipe.id} + '/upload'}" role="button">Change
+										Image</a>
 								</div>
 							</h2>
 						</div>
@@ -45,12 +46,8 @@
 										</ul>
 									</div>
 									<div class="col-md-6">
-										<img src="https://www.allrecipes.com/thmb/vhH8dg1mvecsSKrsvO1WF4c0a0Y=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(1999x0:2001x2):format(webp)/25473-the-perfect-basic-burger-DDMFS-4x3-56eaba3833fd4a26a82755bcd0be0c54.jpg"
-											width="200" height="200">
-										<!--
-                   <img th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}"
-                        width="200" height="200">
-                    -->
+										<img th:src="@{'/image/recipe/' + ${recipe.id} + '/show'}" width="200"
+											height="200">
 									</div>
 								</div>
 								<div class="row">
@@ -149,20 +146,20 @@
 					</div>
 				</div>
 				<div class="card mb-2">
-				<div class="card-header bg-primary">
-					<div class="row">
-						<div class="col-md-10">
-							<h2 class="h4 m-0 fw-bold text-white">Notes</h2>
+					<div class="card-header bg-primary">
+						<div class="row">
+							<div class="col-md-10">
+								<h2 class="h4 m-0 fw-bold text-white">Notes</h2>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h1 class="card-title">Notes</h1>
+							<p th:text="${recipe.note.note}" class="card-text"></p>
 						</div>
 					</div>
 				</div>
-				<div class="card">
-					<div class="card-body">
-						<h1 class="card-title">Notes</h1>
-						<p th:text="${recipe.note.note}" class="card-text"></p>
-					</div>
-				</div>
-			</div>
 			</div>
 
 		</div>

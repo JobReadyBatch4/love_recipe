@@ -1,5 +1,6 @@
 package com.hostmdy.recipe.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class UomServiceImpl implements UomService{
 	public Optional<UnitOfMeasure> getUomByName(String name) {
 		// TODO Auto-generated method stub
 		return uomRepository.findByName(name);
+	}
+
+	@Override
+	public List<UnitOfMeasure> getAllUoms() {
+		// TODO Auto-generated method stub
+		return uomRepository.findAllByOrderByName();
 	}
 
 }

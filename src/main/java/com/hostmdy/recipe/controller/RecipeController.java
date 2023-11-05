@@ -96,4 +96,24 @@ public class RecipeController {
 		return "recipe/add-recipe";
 	}
 	
+	@GetMapping("/{recipeId}/delete")
+	public String deleteRecipe(@PathVariable Long recipeId) {
+		recipeService.deleteRecipeById(recipeId);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/{recipeId}/ingredients")
+	public String showIngredients(@PathVariable Long recipeId,Model model) {
+		Optional<Recipe> recipeOpt = recipeService.getRecipeById(recipeId);
+		if(recipeOpt.isEmpty()) {
+			throw new NullPointerException("recipe is null!");
+		}
+		Recipe recipe = recipeOpt.get();
+		model.addAttribute("ingredients",recipe.getIngredients());
+		model.addAttribute("recipeId", recipeId);
+		
+		return "ingredient/show";
+	}
+	
 }

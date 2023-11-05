@@ -9,7 +9,7 @@ public interface IngredientService {
 	
 	Ingredient saveIngredient(Ingredient ingredient);
 	
-	Ingredient createIngredient(Ingredient ingredient,Long recipeId);
+	Ingredient createIngredient(Ingredient ingredient,Long recipeId,Long uomId);
 	
 	List<Ingredient> getAllIngredientsByRecipe(Long recipeId);
 	
